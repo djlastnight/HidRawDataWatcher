@@ -1,0 +1,123 @@
+﻿<Window x:Class="Watcher.HidRawDataWatcher"
+        x:ClassModifier="internal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Watcher"
+        MinWidth="560"
+        MinHeight="300"
+        Loaded="OnWindowLoaded">
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Left"
+                   LastChildFill="True">
+            <Button DockPanel.Dock="Bottom"
+                    Name="rescanButton"
+                    Content="Update device list"
+                    Margin="5"
+                    Click="OnRescanButtonClicked" />
+            <ListView MinWidth="150"
+                      Name="listView"
+                      SelectionMode="Single"
+                      Loaded="OnListviewLoaded"
+                      SelectionChanged="OnListviewSelectionChanged">
+                <ListView.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </GroupStyle.HeaderTemplate>
+                        <GroupStyle.ContainerStyle>
+                            <Style TargetType="GroupItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Expander IsExpanded="True">
+                                                <Expander.Header>
+                                                    <StackPanel Orientation="Horizontal"
+                                                                TextElement.FontWeight="Bold"
+                                                                TextElement.Foreground="Gray">
+                                                        <TextBlock Text="{Binding Name, StringFormat={}{0} -}"/>
+                                                        <TextBlock Text="{Binding ItemCount}" />
+                                                        <TextBlock Text=" item(s)" />
+                                                    </StackPanel>
+                                                </Expander.Header>
+                                                <ItemsPresenter Margin="35,0,0,0" />
+                                            </Expander>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GroupStyle.ContainerStyle>
+                    </GroupStyle>
+                </ListView.GroupStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate DataType="ListViewItem">
+                        <TextBlock Text="{Binding FriendlyName}"
+                                   ToolTip="{Binding}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </DockPanel>
+        <StackPanel Orientation="Vertical"
+                    DockPanel.Dock="Top">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Vendor ID (VID):"
+                                   Margin="10"/>
+                        <TextBox Name="vid"
+                                 Margin="2,10"
+                                 MinWidth="50"
+                                 MaxLength="4"
+                                 IsEnabled="True"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Product ID (PID)"
+                                   Margin="10"/>
+                        <TextBox Name="pid"
+                                 Margin="2,10"
+                                 MinWidth="50"
+                                 MaxLength="4"
+                                 IsReadOnly="True" />
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel>
+                    <Button Name="startButton"
+                            Content="Start raw data watcher"
+                            Width="180"
+                            Height="26"
+                            Margin="10"
+                            IsDefault="True"
+                            Click="OnStartClicked" />
+                    <Button Name="stopButton"
+                            Content="Stop raw data watcher"
+                            IsEnabled="False"
+                            Width="180"
+                            Height="26"
+                            Click="OnStopClicked" />
+                </StackPanel>
+                <Button Content="Clear"
+                        Width="70"
+                        Height="20"
+                        Click="OnClearButtonClicked"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Device \ Hardware ID:"
+                                   Margin="10"/>
+                <TextBox Name="deviceId"
+                                 Margin="2,10"
+                                 MinWidth="300"
+                                 IsReadOnly="True"/>
+            </StackPanel>
+            <WrapPanel Orientation="Horizontal" Name="layersWrapPanel" />
+        </StackPanel>
+        <ScrollViewer Name="scrollviewer"
+                      DockPanel.Dock="Bottom">
+            <RichTextBox Name="rtb"
+                         AcceptsReturn="True"
+                         IsReadOnly="True"
+                         TextChanged="OnTextChanged" />
+        </ScrollViewer>
+    </DockPanel>
+</Window>
