@@ -1,3 +1,14 @@
+# Support me on Patreon
+<a href="https://www.patreon.com/djlastnight" style="font-size:50px">
+  <img src="https://c5.patreon.com/external/logo/rebrandLogoIconMark@2x.png"
+       height="40"
+       style="vertical-align:top" />
+  Click here to become a patron and get your reward!
+    <img src="https://c5.patreon.com/external/logo/rebrandLogoIconMark@2x.png"
+       height="40"
+       style="vertical-align:top" />
+</a>
+
 # HidRawDataWatcher
 Tested with PC/Xbox360/XBOX ONE/PS2 gamepads, USB mice, USB keyboards and Windows' On-Screen Keyboard under Windows7 x64 and Windows 10 x64.
 
